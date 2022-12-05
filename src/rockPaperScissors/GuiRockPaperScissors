@@ -1,12 +1,17 @@
 package rockPaperScissors;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.JButton;
 import java.awt.FlowLayout;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 /**
  * 
@@ -14,36 +19,79 @@ import java.awt.FlowLayout;
  *
  */
 
-public class GuiRockPaperScissors extends JPanel {
+@SuppressWarnings("serial")
+public class GuiRockPaperScissors extends JFrame {
+
+	private JPanel contentPane;
 
 	/**
-	 * Create the panel.
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GuiRockPaperScissors frame = new GuiRockPaperScissors();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
 	 */
 	public GuiRockPaperScissors() {
-		setLayout(new BorderLayout(0, 0));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 350);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblTitleLabel = new JLabel("Rock Paper Scissors");
 		extracted(lblTitleLabel);
 		
-		JPanel btnPanel = new JPanel();
-		add(btnPanel, BorderLayout.SOUTH);
-		btnPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JPanel buttonPanel = new JPanel();
+		extracted(buttonPanel);
 		
-		JButton btnRockBtn = new JButton("ROCK");
-		btnPanel.add(btnRockBtn);
+		JButton btnRockButton = new JButton("ROCK");
+		buttonPanel.add(btnRockButton);
 		
-		JButton btnPaperBtn = new JButton("PAPER");
-		btnPanel.add(btnPaperBtn);
+		JButton btnPaperButton = new JButton("PAPER");
+		buttonPanel.add(btnPaperButton);
 		
-		JButton btnScissorsBtn = new JButton("SCISSORS");
-		btnPanel.add(btnScissorsBtn);
+		JButton btnScissorsButton = new JButton("SCISSORS");
+		buttonPanel.add(btnScissorsButton);
+		
+		JPanel gamePanel = new JPanel();
+		contentPane.add(gamePanel, BorderLayout.CENTER);
+		gamePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JLabel lblPCLabel = new JLabel("");
+		extracted(gamePanel, lblPCLabel);
+		
+		JLabel lblPlayerLabel = new JLabel("");
+		lblPlayerLabel.setIcon(new ImageIcon(GuiRockPaperScissors.class.getResource("/rockPaperScissorsImages/rock.jpg")));
+		gamePanel.add(lblPlayerLabel);
+	}
 
+	private void extracted(JPanel gamePanel, JLabel lblPCLabel) {
+		lblPCLabel.setIcon(new ImageIcon(GuiRockPaperScissors.class.getResource("/rockPaperScissorsImages/paper.jpg")));
+		gamePanel.add(lblPCLabel);
+	}
+
+	private void extracted(JPanel panel) {
+		contentPane.add(panel, BorderLayout.SOUTH);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 	}
 
 	private void extracted(JLabel lblTitleLabel) {
 		lblTitleLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblTitleLabel, BorderLayout.NORTH);
+		contentPane.add(lblTitleLabel, BorderLayout.NORTH);
 	}
-
 }
