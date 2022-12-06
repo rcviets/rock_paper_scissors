@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.util.Random;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -23,6 +25,9 @@ import javax.swing.ImageIcon;
 public class GuiRockPaperScissors extends JFrame {
 
 	private JPanel contentPane;
+	private RockPaperScissorsPanel leftPCPanel;
+	private RockPaperScissorsPanel rightPlayerPanel;
+	private final Random rand = new Random();
 
 	/**
 	 * Launch the application.
@@ -55,6 +60,9 @@ public class GuiRockPaperScissors extends JFrame {
 		JLabel lblTitleLabel = new JLabel("Rock Paper Scissors");
 		extracted(lblTitleLabel);
 		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.CENTER);
+		
 		JPanel buttonPanel = new JPanel();
 		extracted(buttonPanel);
 		
@@ -67,21 +75,27 @@ public class GuiRockPaperScissors extends JFrame {
 		JButton btnScissorsButton = new JButton("SCISSORS");
 		buttonPanel.add(btnScissorsButton);
 		
-		JPanel gamePanel = new JPanel();
-		contentPane.add(gamePanel, BorderLayout.CENTER);
-		gamePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JLabel lblPCLabel = new JLabel("");
-		extracted(gamePanel, lblPCLabel);
-		
-		JLabel lblPlayerLabel = new JLabel("");
-		lblPlayerLabel.setIcon(new ImageIcon(GuiRockPaperScissors.class.getResource("/rockPaperScissorsImages/rock.jpg")));
-		gamePanel.add(lblPlayerLabel);
-	}
 
-	private void extracted(JPanel gamePanel, JLabel lblPCLabel) {
-		lblPCLabel.setIcon(new ImageIcon(GuiRockPaperScissors.class.getResource("/rockPaperScissorsImages/paper.jpg")));
-		gamePanel.add(lblPCLabel);
+	}
+	
+	private JPanel createDisplayPanel() {
+		JPanel displayPanel = new JPanel();
+		displayPanel.setBorder(new EmptyBorder(10,10,10,10));
+		displayPanel.setLayout(new GridLayout(1,0,10,0));
+		
+		leftPCPanel = new RockPaperScissorsPanel(getRandomRockPaperScissors());
+		displayPanel.add(leftPCPanel);
+		
+		rightPlayerPanel = new RockPaperScissorsPanel(getRandomRockPaperScissors());
+		displayPanel.add(rightPlayerPanel);
+	}
+	
+	private RockPaperScissors getRandomRockPaperScissors() {
+		ThrowType[] allTypes = ThrowType.values();
+		int randomIndex = rand.nextInt(allTypes.length);
+		ThrowType randomType = allTypes[randomIndex];
+		
+		return new RockPaperScissors(randomType);
 	}
 
 	private void extracted(JPanel panel) {
