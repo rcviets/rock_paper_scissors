@@ -17,28 +17,26 @@ public class RockPaperScissorsPanel extends JPanel {
 	private JLabel lblType;
 
 	/**
-	 * Create the panel that displays an image
-	 * corresponding to the type of throw
-	 * and a label that displays whether the 
-	 * throw is rock, paper, or scissors
+	 * Create the panel that displays an image corresponding to the type of throw
+	 * and a label that displays whether the throw is rock, paper, or scissors
 	 */
 	public RockPaperScissorsPanel(RockPaperScissors rockPaperScissors) {
 		this.rockPaperScissors = rockPaperScissors;
-		
+
 		setLayout(new BorderLayout(0, 0));
-		
+
 		lblRockPaperScissors = createLblRockPaperScissors();
 		add(lblRockPaperScissors, BorderLayout.CENTER);
-		
+
 		lblType = createLblType();
 		add(lblType, BorderLayout.SOUTH);
-		
+
 	}
 
 	public RockPaperScissors getRockPaperScissors() {
 		return rockPaperScissors;
 	}
-	
+
 	public void updateRockPaperScissors(RockPaperScissors rockPaperScissors) {
 		this.rockPaperScissors = rockPaperScissors;
 		lblRockPaperScissors.setIcon(getThrowIcon());
@@ -55,17 +53,17 @@ public class RockPaperScissorsPanel extends JPanel {
 
 	private JLabel createLblRockPaperScissors() {
 		JLabel lblRockPaperScissors = new JLabel("");
-		lblRockPaperScissors .setOpaque(true);
-		lblRockPaperScissors .setBackground(Color.WHITE);
-		lblRockPaperScissors .setIcon(getThrowIcon());
-		lblRockPaperScissors .setHorizontalAlignment(SwingConstants.CENTER);
+		lblRockPaperScissors.setOpaque(true);
+		lblRockPaperScissors.setBackground(Color.WHITE);
+		lblRockPaperScissors.setIcon(getThrowIcon());
+		lblRockPaperScissors.setHorizontalAlignment(SwingConstants.CENTER);
 		return lblRockPaperScissors;
 	}
 
 	private Icon getThrowIcon() {
 		String imagePath;
-		
-		switch(rockPaperScissors.getType()) {
+
+		switch (rockPaperScissors.getType()) {
 		case ROCK:
 			imagePath = "/rockPaperScissorsImages/rock.jpg";
 			break;
@@ -79,7 +77,7 @@ public class RockPaperScissorsPanel extends JPanel {
 			imagePath = null;
 			break;
 		}
-		
+
 		return new ImageIcon(RockPaperScissorsPanel.class.getResource(imagePath));
 	}
 

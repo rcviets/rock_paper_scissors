@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class RockPaperScissors {
 	private ThrowType type;
-	
+
 	public RockPaperScissors(ThrowType type) {
 		this.type = type;
 	}
-		
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(type);
